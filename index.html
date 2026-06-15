@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Logístico</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <h2>📦 Logística</h2>
+
+        <ul>
+            <li>Dashboard</li>
+            <li>Transportadoras</li>
+            <li>Regiões</li>
+            <li>Entregas</li>
+            <li>Indicadores</li>
+        </ul>
+    </aside>
+
+    <main class="content">
+
+        <header>
+            <h1>Dashboard Inteligente de Monitoramento Logístico</h1>
+
+            <p>
+                Monitoramento de atrasos, regiões críticas e desempenho das transportadoras.
+            </p>
+        </header>
+
+        <section class="filtros">
+
+            <div class="filtro-box">
+                <label for="filtroRegiao">Região</label>
+
+                <select id="filtroRegiao">
+                    <option value="Todos">Todas as Regiões</option>
+                </select>
+            </div>
+
+            <div class="filtro-box">
+                <label for="filtroTransportadora">Transportadora</label>
+
+                <select id="filtroTransportadora">
+                    <option value="Todos">Todas as Transportadoras</option>
+                </select>
+            </div>
+
+        </section>
+
+        <section class="cards">
+
+            <div class="card">
+                <span>Total de Entregas</span>
+                <h2 id="totalEntregas">0</h2>
+            </div>
+
+            <div class="card alerta">
+                <span>Entregas Atrasadas</span>
+                <h2 id="entregasAtrasadas">0</h2>
+            </div>
+
+            <div class="card">
+                <span>% de Atraso</span>
+                <h2 id="percentualAtraso">0%</h2>
+            </div>
+
+            <div class="card critico">
+                <span>Maior Atraso</span>
+                <h2 id="maiorAtraso">0 dias</h2>
+            </div>
+
+        </section>
+
+        <section class="alertas">
+
+            <div class="alerta-box">
+                <h3>🚨 Alertas Automáticos</h3>
+
+                <ul id="listaAlertas"></ul>
+            </div>
+
+        </section>
+
+        <section class="graficos">
+
+            <div class="grafico-card">
+                <h3>Atrasos por Transportadora</h3>
+                <canvas id="graficoTransportadoras"></canvas>
+            </div>
+
+            <div class="grafico-card">
+                <h3>Atrasos por Região</h3>
+                <canvas id="graficoRegioes"></canvas>
+            </div>
+
+        </section>
+
+        <section class="graficos">
+
+            <div class="grafico-card">
+                <h3>Ranking das Entregas Críticas</h3>
+                <canvas id="graficoRanking"></canvas>
+            </div>
+
+            <div class="grafico-card">
+                <h3>Tendência Operacional</h3>
+                <canvas id="graficoTendencia"></canvas>
+            </div>
+
+        </section>
+
+        <section class="tabela-section">
+
+            <h2>Entregas Atrasadas</h2>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Transportadora</th>
+                        <th>Região</th>
+                        <th>Prazo</th>
+                        <th>Dias Reais</th>
+                        <th>Atraso</th>
+                        <th>Prioridade</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tabelaAtrasos"></tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
