@@ -5,59 +5,35 @@
     font-family:'Segoe UI',sans-serif;
 }
 
-:root{
-    --bg:#020617;
-    --bg-card:#0f172a;
-    --bg-card-hover:#172554;
-    --sidebar:#1e40af;
-    --sidebar-hover:#2563eb;
-    --accent:#38bdf8;
-    --text:#f8fafc;
-    --text-soft:#94a3b8;
-    --border:#1e293b;
-}
-
 html{
     scroll-behavior:smooth;
 }
 
 body{
-    background:linear-gradient(
-        135deg,
-        #020617 0%,
-        #0f172a 50%,
-        #020617 100%
-    );
-    color:var(--text);
+    background:#050b16;
     display:flex;
     min-height:100vh;
+    color:#e2e8f0;
     overflow-x:hidden;
 }
 
 /* ==========================
-   SIDEBAR
+   MENU LATERAL
 ========================== */
 
 .sidebar{
-    width:250px;
-    background:linear-gradient(
-        180deg,
-        #1e40af 0%,
-        #1d4ed8 100%
-    );
+    width:240px;
+    background:#0f2744;
     color:white;
     padding:30px 20px;
     position:fixed;
     height:100%;
-    box-shadow:
-        0 0 30px rgba(56,189,248,.25);
-    z-index:1000;
+    box-shadow:4px 0 20px rgba(0,0,0,.4);
 }
 
 .sidebar h2{
+    margin-bottom:30px;
     text-align:center;
-    margin-bottom:35px;
-    font-size:26px;
 }
 
 .sidebar ul{
@@ -74,35 +50,38 @@ body{
 
 .sidebar li{
     padding:15px;
-    margin-bottom:12px;
+    margin-bottom:10px;
+    background:#16365d;
     border-radius:12px;
     cursor:pointer;
-    transition:.35s;
+    transition:.3s;
     position:relative;
     overflow:hidden;
-    background:rgba(255,255,255,.05);
-    backdrop-filter:blur(5px);
-}
-
-.sidebar li:hover{
-    background:rgba(255,255,255,.15);
-    transform:translateX(8px);
 }
 
 .sidebar li::before{
-    content:'';
+    content:"";
     position:absolute;
     left:0;
     top:0;
     width:4px;
     height:100%;
-    background:white;
+    background:#38bdf8;
     transform:scaleY(0);
     transition:.3s;
 }
 
+.sidebar li:hover{
+    transform:translateX(6px);
+    background:#1d4677;
+}
+
 .sidebar li:hover::before{
     transform:scaleY(1);
+}
+
+.sidebar li.active{
+    border-left:4px solid #38bdf8;
 }
 
 /* ==========================
@@ -110,39 +89,35 @@ body{
 ========================== */
 
 .content{
-    margin-left:250px;
-    width:calc(100% - 250px);
-    padding:35px;
-    transition:1s ease;
+    margin-left:240px;
+    width:calc(100% - 240px);
+    padding:30px;
+
+    transform:scale(0.75);
+    transform-origin:top center;
+    opacity:.65;
+
+    transition:
+    transform 1s cubic-bezier(.22,.61,.36,1),
+    opacity 1s ease;
 }
 
-/* usado no efeito PowerPoint */
-.content.zoomed{
+.content.zoom-dashboard{
     transform:scale(1);
     opacity:1;
 }
 
-.content.mini{
-    transform:scale(.85);
-    opacity:.7;
-}
-
-/* ==========================
-   HEADER
-========================== */
-
 header{
-    margin-bottom:35px;
+    margin-bottom:30px;
 }
 
 header h1{
-    color:white;
+    color:#ffffff;
     margin-bottom:10px;
-    font-size:36px;
 }
 
 header p{
-    color:var(--text-soft);
+    color:#94a3b8;
 }
 
 /* ==========================
@@ -152,33 +127,31 @@ header p{
 .filtros{
     display:flex;
     gap:20px;
-    margin-bottom:25px;
     flex-wrap:wrap;
+    margin-bottom:25px;
 }
 
 .filtro-box{
-    background:var(--bg-card);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:18px;
-    box-shadow:
-        0 0 15px rgba(56,189,248,.08);
+    background:#0f172a;
+    padding:15px;
+    border-radius:15px;
+    border:1px solid #1e293b;
 }
 
 .filtro-box label{
     display:block;
     margin-bottom:8px;
-    color:white;
     font-weight:600;
+    color:white;
 }
 
 .filtro-box select{
-    background:#0b1220;
-    color:white;
-    border:1px solid #334155;
     padding:10px;
-    border-radius:10px;
     min-width:220px;
+    border:none;
+    border-radius:8px;
+    background:#1e293b;
+    color:white;
 }
 
 /* ==========================
@@ -193,29 +166,25 @@ header p{
 }
 
 .card{
-    background:var(--bg-card);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:25px;
-    transition:.35s;
-    box-shadow:
-        0 0 18px rgba(56,189,248,.06);
+    background:#0f172a;
+    padding:20px;
+    border-radius:16px;
+    border:1px solid #1e293b;
+    transition:.3s;
 }
 
 .card:hover{
-    transform:translateY(-6px);
-    box-shadow:
-        0 0 25px rgba(56,189,248,.18);
+    transform:translateY(-5px);
 }
 
 .card span{
-    color:var(--text-soft);
+    color:#94a3b8;
 }
 
 .card h2{
-    color:white;
-    font-size:34px;
     margin-top:10px;
+    font-size:32px;
+    color:white;
 }
 
 .alerta{
@@ -231,20 +200,19 @@ header p{
 ========================== */
 
 .alerta-box{
-    background:var(--bg-card);
-    border-radius:18px;
-    padding:22px;
-    border:1px solid var(--border);
+    background:#0f172a;
+    padding:20px;
+    border-radius:16px;
+    border:1px solid #1e293b;
     margin-bottom:25px;
 }
 
 .alerta-box h3{
-    color:white;
     margin-bottom:15px;
 }
 
 .alerta-box li{
-    color:#cbd5e1;
+    margin-bottom:10px;
 }
 
 /* ==========================
@@ -259,17 +227,15 @@ header p{
 }
 
 .grafico-card{
-    background:var(--bg-card);
-    border:1px solid var(--border);
-    border-radius:18px;
+    background:#0f172a;
     padding:20px;
-    transition:.35s;
+    border-radius:16px;
+    border:1px solid #1e293b;
+    transition:.3s;
 }
 
 .grafico-card:hover{
     transform:translateY(-5px);
-    box-shadow:
-        0 0 25px rgba(56,189,248,.15);
 }
 
 .grafico-card h3{
@@ -282,10 +248,10 @@ header p{
 ========================== */
 
 .tabela-section{
-    background:var(--bg-card);
-    border-radius:18px;
+    background:#0f172a;
     padding:20px;
-    border:1px solid var(--border);
+    border-radius:16px;
+    border:1px solid #1e293b;
     overflow:auto;
     margin-bottom:25px;
 }
@@ -301,20 +267,19 @@ table{
 }
 
 th{
-    background:#1e40af;
+    background:#16365d;
     color:white;
-    padding:14px;
+    padding:12px;
 }
 
 td{
-    padding:14px;
-    border-bottom:1px solid #1e293b;
-    color:#e2e8f0;
+    padding:12px;
     text-align:center;
+    border-bottom:1px solid #1e293b;
 }
 
 tr:hover{
-    background:#0b1220;
+    background:#162033;
 }
 
 /* ==========================
@@ -323,19 +288,19 @@ tr:hover{
 
 .prioridade-alta{
     background:#7f1d1d;
-    color:white;
+    color:#fecaca;
     font-weight:bold;
 }
 
 .prioridade-media{
-    background:#854d0e;
-    color:white;
+    background:#78350f;
+    color:#fde68a;
     font-weight:bold;
 }
 
 .prioridade-baixa{
-    background:#166534;
-    color:white;
+    background:#14532d;
+    color:#bbf7d0;
     font-weight:bold;
 }
 
@@ -344,21 +309,21 @@ tr:hover{
 ========================== */
 
 .explicacao{
-    background:var(--bg-card);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:25px;
+    background:#0f172a;
+    padding:20px;
+    border-radius:16px;
+    border:1px solid #1e293b;
 }
 
 .explicacao h2{
-    color:white;
     margin-bottom:15px;
+    color:white;
 }
 
 .explicacao p{
-    color:#cbd5e1;
-    margin-bottom:10px;
     line-height:1.7;
+    margin-bottom:10px;
+    color:#cbd5e1;
 }
 
 /* ==========================
@@ -374,7 +339,6 @@ tr:hover{
     .content{
         margin-left:0;
         width:100%;
-        padding:20px;
     }
 
     .graficos{
