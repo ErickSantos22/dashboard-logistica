@@ -15,6 +15,10 @@ const dados = [
     { id: 310, transportadora: "ViaCargo", regiao: "Nordeste", prazo: 4, real: 8 }
 ];
 
+// ======================
+// VARIÁVEIS
+// ======================
+
 let chartTransportadora;
 let chartRegiao;
 let chartRanking;
@@ -25,74 +29,10 @@ let chartTendencia;
 // ======================
 
 window.onload = () => {
-
     carregarFiltros();
     atualizarDashboard();
-    configurarMenu();
-
-    const conteudo =
-        document.getElementById("conteudoPrincipal");
-
-    setTimeout(() => {
-
-        conteudo.classList.remove("mini");
-        conteudo.classList.add("zoomed");
-
-    }, 300);
-
 };
 
-// ======================
-// MENU POWERPOINT
-// ======================
-
-function configurarMenu(){
-
-    const menuLinks =
-        document.querySelectorAll(".sidebar a");
-
-    const secoes =
-        document.querySelectorAll(".secao");
-
-    menuLinks.forEach(link => {
-
-        link.addEventListener("click", e => {
-
-            e.preventDefault();
-
-            const destino =
-                link.getAttribute("href")
-                .replace("#","");
-
-            secoes.forEach(secao => {
-                secao.classList.remove("ativa");
-            });
-
-            const alvo =
-                document.getElementById(destino);
-
-            if(alvo){
-
-                setTimeout(() => {
-                    alvo.classList.add("ativa");
-                },100);
-
-            }
-
-            document
-                .querySelectorAll(".sidebar li")
-                .forEach(li =>
-                    li.classList.remove("active")
-                );
-
-            link.parentElement
-                .classList.add("active");
-
-        });
-
-    });
-
-}
 // ======================
 // FILTROS
 // ======================
@@ -109,25 +49,19 @@ function carregarFiltros() {
         [...new Set(dados.map(i => i.regiao))];
 
     const transportadoras =
-        [...new Set(
-            dados.map(i => i.transportadora)
-        )];
+        [...new Set(dados.map(i => i.transportadora))];
 
     regioes.forEach(regiao => {
 
         filtroRegiao.innerHTML +=
-            `<option value="${regiao}">
-            ${regiao}
-            </option>`;
+        `<option value="${regiao}">${regiao}</option>`;
 
     });
 
     transportadoras.forEach(transp => {
 
         filtroTransportadora.innerHTML +=
-            `<option value="${transp}">
-            ${transp}
-            </option>`;
+        `<option value="${transp}">${transp}</option>`;
 
     });
 
@@ -149,78 +83,60 @@ function carregarFiltros() {
 function atualizarDashboard() {
 
     const regiao =
-        document.getElementById(
-            "filtroRegiao"
-        ).value;
+        document.getElementById("filtroRegiao").value;
 
     const transportadora =
-        document.getElementById(
-            "filtroTransportadora"
-        ).value;
+        document.getElementById("filtroTransportadora").value;
 
-    const lista =
-        dados.filter(item => {
+    const lista = dados.filter(item => {
 
-            const filtroRegiao =
-                regiao === "Todos" ||
-                item.regiao === regiao;
+        const filtroRegiao =
+            regiao === "Todos" ||
+            item.regiao === regiao;
 
-            const filtroTransportadora =
-                transportadora === "Todos" ||
-                item.transportadora === transportadora;
+        const filtroTransportadora =
+            transportadora === "Todos" ||
+            item.transportadora === transportadora;
 
-            return (
-                filtroRegiao &&
-                filtroTransportadora
-            );
+        return filtroRegiao && filtroTransportadora;
 
-        });
+    });
 
     atualizarKPIs(lista);
     atualizarTabela(lista);
     atualizarAlertas(lista);
     atualizarGraficos(lista);
-
 }
 
 // ======================
 // KPIs
 // ======================
 
-function atualizarKPIs(lista){
+function atualizarKPIs(lista) {
 
     const atrasadas =
-        lista.filter(
-            i => i.real > i.prazo
-        );
+        lista.filter(i => i.real > i.prazo);
 
     const percentual =
         lista.length > 0
-        ? (
-            atrasadas.length /
-            lista.length * 100
-        ).toFixed(1)
+        ? ((atrasadas.length / lista.length) * 100).toFixed(1)
         : 0;
 
     const maiorAtraso =
         atrasadas.length > 0
-        ? Math.max(
-            ...atrasadas.map(
-                i => i.real - i.prazo
-            )
-        )
+        ? Math.max(...atrasadas.map(i => i.real - i.prazo))
         : 0;
 
-    totalEntregas.textContent =
+    document.getElementById("totalEntregas").textContent =
         lista.length;
 
-    entregasAtrasadas.textContent =
+    document.getElementById("entregasAtrasadas").textContent =
         atrasadas.length;
 
-    percentualAtraso.textContent =
+    document.getElementById("percentualAtraso").textContent =
         percentual + "%";
 
-    maiorAtraso.textContent =
+    document.getElementById("maiorAtraso").textContent =
         maiorAtraso + " dias";
 }
 
@@ -228,48 +144,39 @@ function atualizarKPIs(lista){
 // ALERTAS
 // ======================
 
-function atualizarAlertas(lista){
+function atualizarAlertas(lista) {
 
     const ul =
-        document.getElementById(
-            "listaAlertas"
-        );
+        document.getElementById("listaAlertas");
 
     ul.innerHTML = "";
 
     const atrasadas =
-        lista.filter(
-            i => i.real > i.prazo
-        );
+        lista.filter(i => i.real > i.prazo);
 
     if(atrasadas.length === 0){
 
         ul.innerHTML =
-        "<li>🟢 Nenhum atraso encontrado.</li>";
+        "<li>🟢 Nenhuma entrega atrasada encontrada.</li>";
 
         return;
     }
 
-    atrasadas
-    .sort(
-        (a,b)=>
-        (b.real-b.prazo)-
-        (a.real-a.prazo)
-    )
-    .slice(0,3)
-    .forEach(item => {
+    const pior =
+        [...atrasadas]
+        .sort(
+            (a,b)=>
+            (b.real-b.prazo)-
+            (a.real-a.prazo)
+        )[0];
 
-        ul.innerHTML += `
-            <li>
-            🔴 Entrega ${item.id}
-            com atraso de
-            ${item.real-item.prazo}
-            dias.
-            </li>
-        `;
-
-    });
-
+    ul.innerHTML += `
+        <li>
+            🔴 Entrega ${pior.id}
+            possui atraso de
+            ${pior.real-pior.prazo} dias.
+        </li>
+    `;
 }
 
 // ======================
@@ -279,9 +186,7 @@ function atualizarAlertas(lista){
 function atualizarTabela(lista){
 
     const tbody =
-        document.getElementById(
-            "tabelaAtrasos"
-        );
+        document.getElementById("tabelaAtrasos");
 
     tbody.innerHTML = "";
 
@@ -292,25 +197,16 @@ function atualizarTabela(lista){
         const atraso =
             item.real - item.prazo;
 
-        let prioridade =
-            "Baixa";
-
-        let classe =
-            "prioridade-baixa";
+        let prioridade = "Baixa";
+        let classe = "prioridade-baixa";
 
         if(atraso >= 5){
-
             prioridade = "Alta";
-            classe =
-            "prioridade-alta";
-
+            classe = "prioridade-alta";
         }
         else if(atraso >= 3){
-
             prioridade = "Média";
-            classe =
-            "prioridade-media";
-
+            classe = "prioridade-media";
         }
 
         tbody.innerHTML += `
@@ -327,7 +223,6 @@ function atualizarTabela(lista){
         </tr>
         `;
     });
-
 }
 
 // ======================
@@ -337,32 +232,13 @@ function atualizarTabela(lista){
 function atualizarGraficos(lista){
 
     const atrasadas =
-        lista.filter(
-            i => i.real > i.prazo
-        );
+        lista.filter(i => i.real > i.prazo);
 
-    gerarGraficoTransportadora(
-        atrasadas
-    );
-
-    gerarGraficoRegiao(
-        atrasadas
-    );
-
-    gerarGraficoRanking(
-        atrasadas
-    );
-
-    gerarGraficoTendencia(
-        atrasadas
-    );
-
+    gerarGraficoTransportadora(atrasadas);
+    gerarGraficoRegiao(atrasadas);
+    gerarGraficoRanking(atrasadas);
+    gerarGraficoTendencia(atrasadas);
 }
-
-const azul = "#38bdf8";
-const azulEscuro = "#1e40af";
-
-// ======================
 
 function gerarGraficoTransportadora(atrasadas){
 
@@ -371,34 +247,28 @@ function gerarGraficoTransportadora(atrasadas){
     atrasadas.forEach(item => {
 
         contagem[item.transportadora] =
-            (contagem[item.transportadora] || 0) + 1;
+        (contagem[item.transportadora] || 0) + 1;
 
     });
 
-    if(chartTransportadora)
+    if(chartTransportadora){
         chartTransportadora.destroy();
+    }
 
-    chartTransportadora =
-    new Chart(
-        document.getElementById(
-            "graficoTransportadoras"
-        ),
+    chartTransportadora = new Chart(
+        document.getElementById("graficoTransportadoras"),
         {
             type:"bar",
             data:{
                 labels:Object.keys(contagem),
                 datasets:[{
                     label:"Atrasos",
-                    data:Object.values(contagem),
-                    backgroundColor:azul
+                    data:Object.values(contagem)
                 }]
             }
         }
     );
-
 }
-
-// ======================
 
 function gerarGraficoRegiao(atrasadas){
 
@@ -407,72 +277,53 @@ function gerarGraficoRegiao(atrasadas){
     atrasadas.forEach(item => {
 
         contagem[item.regiao] =
-            (contagem[item.regiao] || 0) + 1;
+        (contagem[item.regiao] || 0) + 1;
 
     });
 
-    if(chartRegiao)
+    if(chartRegiao){
         chartRegiao.destroy();
+    }
 
-    chartRegiao =
-    new Chart(
-        document.getElementById(
-            "graficoRegioes"
-        ),
+    chartRegiao = new Chart(
+        document.getElementById("graficoRegioes"),
         {
             type:"doughnut",
             data:{
                 labels:Object.keys(contagem),
                 datasets:[{
-                    data:Object.values(contagem),
-                    backgroundColor:[
-                        "#38bdf8",
-                        "#60a5fa",
-                        "#2563eb",
-                        "#1d4ed8",
-                        "#0ea5e9"
-                    ]
+                    data:Object.values(contagem)
                 }]
             }
         }
     );
-
 }
-
-// ======================
 
 function gerarGraficoRanking(atrasadas){
 
-    if(chartRanking)
+    if(chartRanking){
         chartRanking.destroy();
+    }
 
     const ranking =
-        [...atrasadas].sort(
+        [...atrasadas]
+        .sort(
             (a,b)=>
             (b.real-b.prazo)-
             (a.real-a.prazo)
         );
 
-    chartRanking =
-    new Chart(
-        document.getElementById(
-            "graficoRanking"
-        ),
+    chartRanking = new Chart(
+        document.getElementById("graficoRanking"),
         {
             type:"bar",
             data:{
-                labels:
-                    ranking.map(
-                        i=>"Entrega "+i.id
-                    ),
+                labels:ranking.map(i=>"Entrega "+i.id),
                 datasets:[{
-                    label:"Dias",
-                    data:
-                        ranking.map(
-                            i=>i.real-i.prazo
-                        ),
-                    backgroundColor:
-                        azulEscuro
+                    label:"Dias de atraso",
+                    data:ranking.map(
+                        i=>i.real-i.prazo
+                    )
                 }]
             },
             options:{
@@ -480,108 +331,28 @@ function gerarGraficoRanking(atrasadas){
             }
         }
     );
-
 }
-
-// ======================
 
 function gerarGraficoTendencia(atrasadas){
 
-    if(chartTendencia)
+    if(chartTendencia){
         chartTendencia.destroy();
+    }
 
-    chartTendencia =
-    new Chart(
-        document.getElementById(
-            "graficoTendencia"
-        ),
+    chartTendencia = new Chart(
+        document.getElementById("graficoTendencia"),
         {
             type:"line",
             data:{
-                labels:
-                    atrasadas.map(
-                        i=>i.id
-                    ),
+                labels:atrasadas.map(i=>i.id),
                 datasets:[{
-                    label:"Dias",
-                    data:
-                        atrasadas.map(
-                            i=>i.real-i.prazo
-                        ),
-                    borderColor:azul,
+                    label:"Dias de atraso",
+                    data:atrasadas.map(
+                        i=>i.real-i.prazo
+                    ),
                     tension:0.4
                 }]
             }
         }
     );
-
 }
-// ======================
-// EFEITO POWERPOINT
-// ======================
-
-window.addEventListener("load", () => {
-
-    const conteudo =
-        document.getElementById("conteudoPrincipal");
-
-    if (!conteudo) return;
-
-    // Mantém a tela miniaturizada ao abrir
-    conteudo.classList.remove("zoom-dashboard");
-
-});
-
-const btnDashboard =
-    document.getElementById("btnDashboard");
-
-if(btnDashboard){
-
-    btnDashboard.addEventListener("click", (e) => {
-
-        e.preventDefault();
-
-        const conteudo =
-            document.getElementById("conteudoPrincipal");
-
-        // Reinicia a animação
-        conteudo.classList.remove("zoom-dashboard");
-
-        void conteudo.offsetWidth;
-
-        setTimeout(() => {
-
-            conteudo.classList.add("zoom-dashboard");
-
-            document
-                .getElementById("dashboard")
-                .scrollIntoView({
-                    behavior:"smooth"
-                });
-
-        }, 100);
-
-    });
-
-}
-
-// ======================
-// MENU ATIVO
-// ======================
-
-const menuItems =
-    document.querySelectorAll(".sidebar li");
-
-menuItems.forEach(item => {
-
-    item.addEventListener("click", () => {
-
-        menuItems.forEach(i =>
-            i.classList.remove("active")
-        );
-
-        item.classList.add("active");
-
-    });
-
-});
