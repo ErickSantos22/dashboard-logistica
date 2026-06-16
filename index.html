@@ -23,39 +23,53 @@
         <ul>
 
             <li class="active">
-                <a href="#dashboard">📊 Dashboard</a>
+                <a href="#dashboard" id="btnDashboard">
+                    📊 Dashboard
+                </a>
             </li>
 
             <li>
-                <a href="#transportadoras">🚚 Transportadoras</a>
+                <a href="#transportadoras">
+                    🚚 Transportadoras
+                </a>
             </li>
 
             <li>
-                <a href="#regioes">🌎 Regiões</a>
+                <a href="#regioes">
+                    🌎 Regiões
+                </a>
             </li>
 
             <li>
-                <a href="#entregas">📦 Entregas</a>
+                <a href="#entregas">
+                    📦 Entregas
+                </a>
             </li>
 
             <li>
-                <a href="#indicadores">📈 Indicadores</a>
+                <a href="#indicadores">
+                    📈 Indicadores
+                </a>
             </li>
 
         </ul>
 
     </aside>
 
-    <main class="content mini" id="conteudoPrincipal">
+    <main
+        id="conteudoPrincipal"
+        class="content">
 
         <header id="dashboard">
 
-            <h1>Dashboard Inteligente de Monitoramento Logístico</h1>
+            <h1>
+                Dashboard Inteligente de Monitoramento Logístico
+            </h1>
 
             <p>
-                Monitoramento em tempo real de atrasos,
-                regiões críticas, desempenho das transportadoras
-                e apoio estratégico à tomada de decisão.
+                Monitoramento de atrasos, regiões críticas,
+                desempenho das transportadoras e apoio à tomada
+                de decisão em tempo real.
             </p>
 
         </header>
@@ -96,7 +110,9 @@
 
         </section>
 
-        <section class="cards" id="indicadores">
+        <section
+            class="cards"
+            id="indicadores">
 
             <div class="card">
 
@@ -144,7 +160,9 @@
 
         </section>
 
-        <section class="graficos" id="transportadoras">
+        <section
+            class="graficos"
+            id="transportadoras">
 
             <div class="grafico-card">
 
@@ -152,17 +170,23 @@
                     Atrasos por Transportadora
                 </h3>
 
-                <canvas id="graficoTransportadoras"></canvas>
+                <canvas
+                    id="graficoTransportadoras">
+                </canvas>
 
             </div>
 
-            <div class="grafico-card" id="regioes">
+            <div
+                class="grafico-card"
+                id="regioes">
 
                 <h3>
                     Distribuição de Atrasos por Região
                 </h3>
 
-                <canvas id="graficoRegioes"></canvas>
+                <canvas
+                    id="graficoRegioes">
+                </canvas>
 
             </div>
 
@@ -176,7 +200,9 @@
                     Ranking das Entregas Mais Críticas
                 </h3>
 
-                <canvas id="graficoRanking"></canvas>
+                <canvas
+                    id="graficoRanking">
+                </canvas>
 
             </div>
 
@@ -186,7 +212,9 @@
                     Tendência Operacional
                 </h3>
 
-                <canvas id="graficoTendencia"></canvas>
+                <canvas
+                    id="graficoTendencia">
+                </canvas>
 
             </div>
 
@@ -224,7 +252,10 @@
 
                 </thead>
 
-                <tbody id="tabelaAtrasos"></tbody>
+                <tbody
+                    id="tabelaAtrasos">
+
+                </tbody>
 
             </table>
 
@@ -238,24 +269,23 @@
 
             <p>
                 Uma entrega é considerada atrasada quando
-                <strong>dias_reais > prazo_dias</strong>.
+                <strong>
+                    dias_reais > prazo_dias
+                </strong>.
             </p>
 
             <p>
-                O atraso é calculado pela diferença:
-                <strong>dias_reais - prazo_dias</strong>.
+                O atraso é calculado por:
+                <strong>
+                    dias_reais - prazo_dias
+                </strong>.
             </p>
 
             <p>
-                O dashboard identifica automaticamente
-                transportadoras problemáticas, regiões
-                críticas e entregas prioritárias.
-            </p>
-
-            <p>
-                Os filtros permitem análises estratégicas
-                em tempo real para apoiar decisões
-                operacionais.
+                O dashboard prioriza automaticamente
+                as entregas mais críticas e destaca
+                regiões e transportadoras com maior
+                incidência de atrasos.
             </p>
 
         </section>
