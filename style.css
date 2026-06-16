@@ -2,7 +2,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+    font-family:'Segoe UI', sans-serif;
 }
 
 html{
@@ -10,25 +10,19 @@ html{
 }
 
 body{
-    background:#050b16;
+    background:#f1f5f9;
     display:flex;
     min-height:100vh;
-    color:#e2e8f0;
-    overflow-x:hidden;
+    color:#1e293b;
 }
-
-/* ==========================
-   MENU LATERAL
-========================== */
 
 .sidebar{
     width:240px;
-    background:#0f2744;
+    background:#0f172a;
     color:white;
     padding:30px 20px;
     position:fixed;
     height:100%;
-    box-shadow:4px 0 20px rgba(0,0,0,.4);
 }
 
 .sidebar h2{
@@ -51,16 +45,16 @@ body{
 .sidebar li{
     padding:15px;
     margin-bottom:10px;
-    background:#16365d;
-    border-radius:12px;
+    background:#1e293b;
+    border-radius:10px;
     cursor:pointer;
-    transition:.3s;
+    transition:0.3s;
     position:relative;
     overflow:hidden;
 }
 
 .sidebar li::before{
-    content:"";
+    content:'';
     position:absolute;
     left:0;
     top:0;
@@ -68,12 +62,12 @@ body{
     height:100%;
     background:#38bdf8;
     transform:scaleY(0);
-    transition:.3s;
+    transition:0.3s;
 }
 
 .sidebar li:hover{
+    background:#334155;
     transform:translateX(6px);
-    background:#1d4677;
 }
 
 .sidebar li:hover::before{
@@ -81,30 +75,14 @@ body{
 }
 
 .sidebar li.active{
+    background:#334155;
     border-left:4px solid #38bdf8;
 }
-
-/* ==========================
-   CONTEÚDO
-========================== */
 
 .content{
     margin-left:240px;
     width:calc(100% - 240px);
     padding:30px;
-
-    transform:scale(0.75);
-    transform-origin:top center;
-    opacity:.65;
-
-    transition:
-    transform 1s cubic-bezier(.22,.61,.36,1),
-    opacity 1s ease;
-}
-
-.content.zoom-dashboard{
-    transform:scale(1);
-    opacity:1;
 }
 
 header{
@@ -112,51 +90,40 @@ header{
 }
 
 header h1{
-    color:#ffffff;
     margin-bottom:10px;
+    color:#0f172a;
 }
 
 header p{
-    color:#94a3b8;
+    color:#64748b;
 }
-
-/* ==========================
-   FILTROS
-========================== */
 
 .filtros{
     display:flex;
     gap:20px;
-    flex-wrap:wrap;
     margin-bottom:25px;
+    flex-wrap:wrap;
 }
 
 .filtro-box{
-    background:#0f172a;
+    background:white;
     padding:15px;
-    border-radius:15px;
-    border:1px solid #1e293b;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
 }
 
 .filtro-box label{
     display:block;
     margin-bottom:8px;
     font-weight:600;
-    color:white;
 }
 
 .filtro-box select{
     padding:10px;
     min-width:220px;
-    border:none;
+    border:1px solid #cbd5e1;
     border-radius:8px;
-    background:#1e293b;
-    color:white;
 }
-
-/* ==========================
-   CARDS
-========================== */
 
 .cards{
     display:grid;
@@ -166,25 +133,25 @@ header p{
 }
 
 .card{
-    background:#0f172a;
+    background:white;
     padding:20px;
-    border-radius:16px;
-    border:1px solid #1e293b;
-    transition:.3s;
+    border-radius:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    transition:0.3s;
 }
 
 .card:hover{
-    transform:translateY(-5px);
+    transform:translateY(-4px);
 }
 
 .card span{
-    color:#94a3b8;
+    color:#64748b;
+    font-size:14px;
 }
 
 .card h2{
     margin-top:10px;
     font-size:32px;
-    color:white;
 }
 
 .alerta{
@@ -195,29 +162,28 @@ header p{
     border-left:6px solid #ef4444;
 }
 
-/* ==========================
-   ALERTAS
-========================== */
+.alertas{
+    margin-bottom:25px;
+}
 
 .alerta-box{
-    background:#0f172a;
+    background:white;
+    border-radius:15px;
     padding:20px;
-    border-radius:16px;
-    border:1px solid #1e293b;
-    margin-bottom:25px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
 }
 
 .alerta-box h3{
     margin-bottom:15px;
 }
 
+.alerta-box ul{
+    padding-left:20px;
+}
+
 .alerta-box li{
     margin-bottom:10px;
 }
-
-/* ==========================
-   GRÁFICOS
-========================== */
 
 .graficos{
     display:grid;
@@ -227,37 +193,28 @@ header p{
 }
 
 .grafico-card{
-    background:#0f172a;
+    background:white;
     padding:20px;
-    border-radius:16px;
-    border:1px solid #1e293b;
-    transition:.3s;
+    border-radius:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    transition:0.3s;
 }
 
 .grafico-card:hover{
-    transform:translateY(-5px);
+    transform:translateY(-4px);
 }
 
 .grafico-card h3{
-    color:white;
     margin-bottom:20px;
 }
 
-/* ==========================
-   TABELA
-========================== */
-
 .tabela-section{
-    background:#0f172a;
+    background:white;
     padding:20px;
-    border-radius:16px;
-    border:1px solid #1e293b;
-    overflow:auto;
+    border-radius:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
     margin-bottom:25px;
-}
-
-.tabela-section h2{
-    color:white;
+    overflow:auto;
 }
 
 table{
@@ -267,7 +224,7 @@ table{
 }
 
 th{
-    background:#16365d;
+    background:#0f172a;
     color:white;
     padding:12px;
 }
@@ -275,62 +232,48 @@ th{
 td{
     padding:12px;
     text-align:center;
-    border-bottom:1px solid #1e293b;
+    border-bottom:1px solid #e2e8f0;
 }
 
 tr:hover{
-    background:#162033;
+    background:#f8fafc;
 }
 
-/* ==========================
-   PRIORIDADES
-========================== */
-
 .prioridade-alta{
-    background:#7f1d1d;
-    color:#fecaca;
+    background:#fee2e2;
+    color:#991b1b;
     font-weight:bold;
 }
 
 .prioridade-media{
-    background:#78350f;
-    color:#fde68a;
+    background:#fef3c7;
+    color:#92400e;
     font-weight:bold;
 }
 
 .prioridade-baixa{
-    background:#14532d;
-    color:#bbf7d0;
+    background:#dcfce7;
+    color:#166534;
     font-weight:bold;
 }
 
-/* ==========================
-   EXPLICAÇÃO
-========================== */
-
 .explicacao{
-    background:#0f172a;
+    background:white;
     padding:20px;
-    border-radius:16px;
-    border:1px solid #1e293b;
+    border-radius:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
 }
 
 .explicacao h2{
     margin-bottom:15px;
-    color:white;
 }
 
 .explicacao p{
-    line-height:1.7;
     margin-bottom:10px;
-    color:#cbd5e1;
+    line-height:1.6;
 }
 
-/* ==========================
-   RESPONSIVO
-========================== */
-
-@media(max-width:1000px){
+@media (max-width:1000px){
 
     .sidebar{
         display:none;
@@ -344,31 +287,5 @@ tr:hover{
     .graficos{
         grid-template-columns:1fr;
     }
-}
-/* ==========================
-   EFEITO POWERPOINT REAL
-========================== */
 
-.secao{
-    transition:
-    transform .9s cubic-bezier(.22,.61,.36,1),
-    opacity .9s ease,
-    filter .9s ease;
-
-    transform:scale(.55);
-    opacity:.25;
-    filter:blur(2px);
-}
-
-.secao.ativa{
-    transform:scale(1);
-    opacity:1;
-    filter:blur(0);
-}
-
-.content{
-    margin-left:240px;
-    width:calc(100% - 240px);
-    padding:30px;
-    overflow:hidden;
 }
