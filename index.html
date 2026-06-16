@@ -23,7 +23,7 @@
         <ul>
 
             <li class="active">
-                <a href="#dashboard" id="btnDashboard">
+                <a href="#dashboard">
                     📊 Dashboard
                 </a>
             </li>
@@ -56,11 +56,13 @@
 
     </aside>
 
-    <main
-        id="conteudoPrincipal"
-        class="content">
+    <main id="conteudoPrincipal" class="content">
 
-        <header id="dashboard">
+        <!-- DASHBOARD -->
+
+        <header
+            id="dashboard"
+            class="secao ativa">
 
             <h1>
                 Dashboard Inteligente de Monitoramento Logístico
@@ -73,6 +75,8 @@
             </p>
 
         </header>
+
+        <!-- FILTROS -->
 
         <section class="filtros">
 
@@ -110,43 +114,35 @@
 
         </section>
 
+        <!-- INDICADORES -->
+
         <section
-            class="cards"
+            class="cards secao"
             id="indicadores">
 
             <div class="card">
-
                 <span>Total de Entregas</span>
-
                 <h2 id="totalEntregas">0</h2>
-
             </div>
 
             <div class="card alerta">
-
                 <span>Entregas Atrasadas</span>
-
                 <h2 id="entregasAtrasadas">0</h2>
-
             </div>
 
             <div class="card">
-
                 <span>% de Atraso</span>
-
                 <h2 id="percentualAtraso">0%</h2>
-
             </div>
 
             <div class="card critico">
-
                 <span>Maior Atraso</span>
-
                 <h2 id="maiorAtraso">0 dias</h2>
-
             </div>
 
         </section>
+
+        <!-- ALERTAS -->
 
         <section class="alertas">
 
@@ -160,8 +156,10 @@
 
         </section>
 
+        <!-- TRANSPORTADORAS -->
+
         <section
-            class="graficos"
+            class="graficos secao"
             id="transportadoras">
 
             <div class="grafico-card">
@@ -176,8 +174,10 @@
 
             </div>
 
+            <!-- REGIÕES -->
+
             <div
-                class="grafico-card"
+                class="grafico-card secao"
                 id="regioes">
 
                 <h3>
@@ -191,6 +191,8 @@
             </div>
 
         </section>
+
+        <!-- RANKING -->
 
         <section class="graficos">
 
@@ -220,8 +222,10 @@
 
         </section>
 
+        <!-- ENTREGAS -->
+
         <section
-            class="tabela-section"
+            class="tabela-section secao"
             id="entregas">
 
             <h2>
@@ -233,59 +237,43 @@
                 <thead>
 
                     <tr>
-
                         <th>ID</th>
-
                         <th>Transportadora</th>
-
                         <th>Região</th>
-
                         <th>Prazo</th>
-
                         <th>Dias Reais</th>
-
                         <th>Atraso</th>
-
                         <th>Prioridade</th>
-
                     </tr>
 
                 </thead>
 
-                <tbody
-                    id="tabelaAtrasos">
-
-                </tbody>
+                <tbody id="tabelaAtrasos"></tbody>
 
             </table>
 
         </section>
 
+        <!-- EXPLICAÇÃO -->
+
         <section class="explicacao">
 
-            <h2>
-                Lógica Utilizada
-            </h2>
+            <h2>Lógica Utilizada</h2>
 
             <p>
                 Uma entrega é considerada atrasada quando
-                <strong>
-                    dias_reais > prazo_dias
-                </strong>.
+                <strong>dias_reais > prazo_dias</strong>.
             </p>
 
             <p>
                 O atraso é calculado por:
-                <strong>
-                    dias_reais - prazo_dias
-                </strong>.
+                <strong>dias_reais - prazo_dias</strong>.
             </p>
 
             <p>
-                O dashboard prioriza automaticamente
-                as entregas mais críticas e destaca
-                regiões e transportadoras com maior
-                incidência de atrasos.
+                O dashboard prioriza automaticamente as entregas
+                mais críticas e destaca regiões e transportadoras
+                com maior incidência de atrasos.
             </p>
 
         </section>
@@ -295,5 +283,4 @@
     <script src="script.js"></script>
 
 </body>
-
 </html>
