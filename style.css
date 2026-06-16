@@ -345,3 +345,30 @@ tr:hover{
         grid-template-columns:1fr;
     }
 }
+/* ==========================
+   EFEITO POWERPOINT REAL
+========================== */
+
+.secao{
+    transition:
+    transform .9s cubic-bezier(.22,.61,.36,1),
+    opacity .9s ease,
+    filter .9s ease;
+
+    transform:scale(.55);
+    opacity:.25;
+    filter:blur(2px);
+}
+
+.secao.ativa{
+    transform:scale(1);
+    opacity:1;
+    filter:blur(0);
+}
+
+.content{
+    margin-left:240px;
+    width:calc(100% - 240px);
+    padding:30px;
+    overflow:hidden;
+}
