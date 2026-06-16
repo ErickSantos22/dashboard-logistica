@@ -43,62 +43,56 @@ window.onload = () => {
 };
 
 // ======================
-// MENU LATERAL
+// MENU POWERPOINT
 // ======================
 
 function configurarMenu(){
 
-    const links =
-        document.querySelectorAll(".sidebar li");
+    const menuLinks =
+        document.querySelectorAll(".sidebar a");
 
-    links.forEach(item => {
+    const secoes =
+        document.querySelectorAll(".secao");
 
-        item.addEventListener("click", () => {
+    menuLinks.forEach(link => {
 
-            links.forEach(i =>
-                i.classList.remove("active")
-            );
+        link.addEventListener("click", e => {
 
-            item.classList.add("active");
+            e.preventDefault();
+
+            const destino =
+                link.getAttribute("href")
+                .replace("#","");
+
+            secoes.forEach(secao => {
+                secao.classList.remove("ativa");
+            });
+
+            const alvo =
+                document.getElementById(destino);
+
+            if(alvo){
+
+                setTimeout(() => {
+                    alvo.classList.add("ativa");
+                },100);
+
+            }
+
+            document
+                .querySelectorAll(".sidebar li")
+                .forEach(li =>
+                    li.classList.remove("active")
+                );
+
+            link.parentElement
+                .classList.add("active");
 
         });
 
     });
 
-    const dashboardLink =
-        document.querySelector(
-            '.sidebar a[href="#dashboard"]'
-        );
-
-    dashboardLink.addEventListener(
-        "click",
-        efeitoPowerPoint
-    );
 }
-
-// ======================
-// EFEITO POWERPOINT
-// ======================
-
-function efeitoPowerPoint(){
-
-    const conteudo =
-        document.getElementById("conteudoPrincipal");
-
-    conteudo.classList.remove("zoomed");
-
-    conteudo.classList.add("mini");
-
-    setTimeout(() => {
-
-        conteudo.classList.remove("mini");
-
-        conteudo.classList.add("zoomed");
-
-    }, 200);
-
-}
-
 // ======================
 // FILTROS
 // ======================
