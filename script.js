@@ -522,3 +522,72 @@ function gerarGraficoTendencia(atrasadas){
     );
 
 }
+// ======================
+// EFEITO POWERPOINT
+// ======================
+
+window.addEventListener("load", () => {
+
+    const conteudo =
+        document.getElementById("conteudoPrincipal");
+
+    if (!conteudo) return;
+
+    // Mantém a tela miniaturizada ao abrir
+    conteudo.classList.remove("zoom-dashboard");
+
+});
+
+const btnDashboard =
+    document.getElementById("btnDashboard");
+
+if(btnDashboard){
+
+    btnDashboard.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        const conteudo =
+            document.getElementById("conteudoPrincipal");
+
+        // Reinicia a animação
+        conteudo.classList.remove("zoom-dashboard");
+
+        void conteudo.offsetWidth;
+
+        setTimeout(() => {
+
+            conteudo.classList.add("zoom-dashboard");
+
+            document
+                .getElementById("dashboard")
+                .scrollIntoView({
+                    behavior:"smooth"
+                });
+
+        }, 100);
+
+    });
+
+}
+
+// ======================
+// MENU ATIVO
+// ======================
+
+const menuItems =
+    document.querySelectorAll(".sidebar li");
+
+menuItems.forEach(item => {
+
+    item.addEventListener("click", () => {
+
+        menuItems.forEach(i =>
+            i.classList.remove("active")
+        );
+
+        item.classList.add("active");
+
+    });
+
+});
